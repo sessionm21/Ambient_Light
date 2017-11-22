@@ -18,6 +18,7 @@ void setup()
   Serial.begin(9600);
   strip.begin();
   blue();
+  strip.setBrightness(10);
   //fade_to(200,0,0);
 }
 void loop()
@@ -42,6 +43,11 @@ void loop()
           break;
         case '4':
           input_mode();
+          break;
+        case 'b':
+          int t = get_number();
+          strip.setBrightness(t);
+          strip.show();
           break;
         }
     }
@@ -75,23 +81,24 @@ int get_number()
 inline void fade_to(int r, int g, int b)
 {
   int n;
-  for(n = 255; n>=50; n--)
-    {
-      strip.setBrightness(n);
-      strip.show();
-      delay(10);
-    }
+  //for(n = 255; n>=50; n--)
+  //  {
+  //    strip.setBrightness(n);
+  //    strip.show();
+  //    delay(10);
+  //  }
   for(int i = 0; i< NUM_LEDS; i++)
     {
       strip.setPixelColor(i, r, g, b);
     }
-  strip.setBrightness(n);
-  for(int i = 10; i<255; i++)
-    {
-      strip.setBrightness(i);
-      strip.show();
-      delay(10);
-    }
+  strip.show();
+  //strip.setBrightness(n);
+  //for(int i = 10; i<255; i++)
+  //  {
+  //    strip.setBrightness(i);
+  //    strip.show();
+  //    delay(10);
+  //  }
 }
 void red()
 {
@@ -106,7 +113,7 @@ void green()
 {
   for(int i = 0; i< NUM_LEDS; i++)
     {
-      strip.setPixelColor(i, 255, 0, 0);
+      strip.setPixelColor(i, 0, 255, 0);
       strip.show();
       delay(10);
     }
